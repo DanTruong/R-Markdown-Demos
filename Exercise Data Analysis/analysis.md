@@ -1,5 +1,10 @@
-# Exercise Trends Data Analysis
-Daniel Truong  
+---
+title: "Exercise Trends Data Analysis"
+author: "Daniel Truong"
+output: 
+  html_document:
+    keep_md: true
+---
 
 ## Synopsis
 
@@ -24,7 +29,7 @@ library(ggplot2)
 ```
 
 ```
-## Warning: package 'ggplot2' was built under R version 3.3.1
+## Warning: package 'ggplot2' was built under R version 3.4.3
 ```
 
 ```r
@@ -128,7 +133,7 @@ ggplot(steps.sum, aes(Steps)) + geom_histogram() + ggtitle("Histogram of steps t
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-![](README_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+![](analysis_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
 Here, we have the calculations of the mean and median of the total number of steps taken per day:
 
@@ -170,7 +175,7 @@ names(avg.steps) <- c("Interval", "Steps")
 ggplot(avg.steps, aes(Interval, Steps)) + geom_line() + xlab("5-minute Interval") + ylab("Average Steps") + ggtitle("Average activity pattern\nover 5-minute intervals in a day")
 ```
 
-![](README_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](analysis_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
 Of all averages (over a 5-minute interval), we will find the maximum amount of steps taken and the interval for which this occurs. Below is the code and results:
 
@@ -231,7 +236,7 @@ ggplot(steps.sum.imputed, aes(Steps)) + geom_histogram() + ggtitle("Histogram of
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-![](README_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+![](analysis_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
 
 ...as well the mean and median (total number of steps taken per day)...
 
@@ -307,7 +312,7 @@ activity.weektype.mean <- aggregate(Steps ~ Interval + DayType, data = activity.
 ggplot(activity.weektype.mean, aes(Interval, Steps)) + geom_line() + facet_grid(DayType ~ .) + xlab("Interval") + ylab("Steps") + ggtitle("Time-series plot of\nWeekday vs. Weekend Exercise")
 ```
 
-![](README_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
+![](analysis_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
 
 Based on a cursory glance of the plot, we see similar exercise trends (in that they occur heavily after 5:00 and peters out near 20:00). However, weekday exercise trends are stronger (morning-time exercise is greater and workout starts and ends slightly earlier). 
 
