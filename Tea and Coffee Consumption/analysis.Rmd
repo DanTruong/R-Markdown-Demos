@@ -1,0 +1,83 @@
+---
+title: "Coffee and Tea Consumption Analysis"
+author: "Dan Truong"
+date: "December 14, 2017"
+output: 
+  html_document:
+    keep_md: true
+---
+
+## Data Description
+
+The data is a collection of weekly coffee and tea drinkers and health information that is attributed to each sample. Each sample population had their height (in cm), weight (in kg) and age collected for this analysis. The sample size of for this data is 23. 
+
+## Descriptive Statistics
+
+```{r}
+library(readxl)
+library(psych)
+rawData <- read_excel("data.xlsx")
+
+procData <- rawData[2:6]
+colnames(procData) <- c("Age", "Height", "Weight", "Tea", "Coffee")
+describe(procData)
+```
+
+## Whisker Boxplots
+```{r}
+attach(procData)
+par(mfrow = c(2, 3))
+boxplot(procData$Age, main = "Age Range")
+boxplot(procData$Height, ylab = "Height (in cm)", main = "Height Range")
+boxplot(procData$Weight, ylab = "Weight (in kg)", main = "Weight Range")
+boxplot(procData$Tea, ylab = "Servings", main = "Weekly Tea")
+boxplot(procData$Coffee, ylab = "Servings", main = "Weekly Coffee")
+```
+
+## Scatter Plots
+
+* Height vs. Weight
+* Tea consumption vs Coffee consumption
+* Weight vs Coffee consumption
+
+```{r}
+par(mfrow = c(2,2))
+plot(data.frame(procData$Weight, procData$Height), main = "Height vs. Weight", xlab = "Height (in cm)", ylab = "Weight (in kg)")
+plot(data.frame(procData$Coffee, procData$Tea), main = "Weekly Tea vs. Coffee Consumption", xlab = "Coffee", ylab = "Tea")
+plot(data.frame(procData$Coffee, procData$Weight), main = "Weight vs. Coffee Consumption", xlab = "Weekly Coffee", ylab = "Weight (in kg)")
+```
+
+## Generate BMI variable
+
+New column BMI = [Weight in Kg / (Height in Meters) ^ 2] with Descriptive Statistics.
+
+#### Preview of BMI Data (compared to other variables)
+
+```{r}
+procData$BMI = procData$Weight / (procData$Height / 100) ^ 2
+head(procData)
+```
+
+#### BMI Descriptive Statistics
+
+```{r}
+describe(procData$BMI)
+```
+
+## IQRs (Interquartile Ranges)
+
+#### Weekly Tea IQR
+
+```{r}
+summary(procData$Tea)
+```
+
+#### Weekly Coffee IQR
+
+```{r}
+summary(procData$Coffee)
+```
+
+
+
+
